@@ -1,6 +1,5 @@
 package Game;
 
-import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.MouseEvent;
@@ -14,11 +13,10 @@ public class Minesweeper implements MouseListener {
 	JFrame frame;
 	Btn[][] board = new Btn[10][10];
 	int openButton;
-	Color color=new Color(209, 242, 235);
-
+	
 	public Minesweeper() {
 		openButton = 0;
-		frame = new JFrame("MÝNESWEEPER");
+		frame = new JFrame("MINESWEEPER");
 		frame.setSize(600, 600);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setLayout(new GridLayout(10, 10));
@@ -36,7 +34,6 @@ public class Minesweeper implements MouseListener {
 
 		frame.setVisible(true);
 	}
-
 	public void generateMine() {
 		int i = 0;
 		while (i < 10) {
@@ -51,7 +48,6 @@ public class Minesweeper implements MouseListener {
 			i++;
 		}
 	}
-
 	public void updateCount() {
 		for (int row = 0; row < board.length; row++) {
 			for (int col = 0; col < board[0].length; col++) {
@@ -61,7 +57,6 @@ public class Minesweeper implements MouseListener {
 			}
 		}
 	}
-
 	public void counting(int row, int col) {
 		for (int i = row - 1; i <= row + 1; i++) {
 			for (int k = col - 1; k <= col + 1; k++) {
@@ -74,13 +69,12 @@ public class Minesweeper implements MouseListener {
 			}
 		}
 	}
-
 	public void print() {
 		for (int row = 0; row < board.length; row++) {
 			for (int col = 0; col < board[0].length; col++) {
 				if (board[row][col].isMine()) {
 					ImageIcon mineicon = new ImageIcon("mine.png");
-					board[row][col].setText("M");
+					board[row][col].setText("Mine");
 					board[row][col].setIcon(mineicon);
 				} else {
 					board[row][col].setText(board[row][col].getCount() + "");
@@ -89,7 +83,6 @@ public class Minesweeper implements MouseListener {
 			}
 		}
 	}
-
 	public void open(int r, int c) {
 		if (r < 0 || r >= board.length || c < 0 || c >= board[0].length || board[r][c].getText().length() > 0
 				|| board[r][c].isEnabled() == false) {
@@ -118,14 +111,14 @@ public class Minesweeper implements MouseListener {
 			} else {
 				open(b.getRow(), b.getCol());
 				if (openButton == (board.length * board[0].length) - 10) {
-					JOptionPane.showMessageDialog(frame, "**** YOU WÝN ****");
+					JOptionPane.showMessageDialog(frame, "**** YOU WIN ****");
 					print();
 				}
 			}
 		} else if (e.getButton() == 3) {
 			if (!b.isFlag()) {
 				ImageIcon flagicon = new ImageIcon("flag.jpg");
-				b.setText("F");
+				b.setText("Flag");
 				b.setIcon(flagicon);
 				b.setFlag(true);
 			} else {
@@ -133,23 +126,17 @@ public class Minesweeper implements MouseListener {
 				b.setText("");
 				b.setFlag(false);
 			}
-
 		}
-
 	}
-
 	@Override
 	public void mouseEntered(MouseEvent arg0) {
 	}
-
 	@Override
 	public void mouseExited(MouseEvent arg0) {
 	}
-
 	@Override
 	public void mousePressed(MouseEvent arg0) {
 	}
-
 	@Override
 	public void mouseReleased(MouseEvent arg0) {
 	}
